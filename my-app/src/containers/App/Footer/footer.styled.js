@@ -32,7 +32,6 @@ export const StyledFooterText = styled.div`
 
     height: 80%;
 
-
     font-size: 14px;
     color: gray;
 
@@ -54,12 +53,12 @@ export const StyledLogo = styled.div`
 `;
 
 export const StyleShares = styled.div`
-display: flex;
-flex:4;
-height: 50%;
+    display: flex;
+    flex:4;
+    height: 50%;
 
-align-items: center;
-justify-content: flex-end;
+    align-items: center;
+    justify-content: flex-end;
 `;
 
 export const IconBase = styled(Icon)`
