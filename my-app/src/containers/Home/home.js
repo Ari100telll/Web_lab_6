@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
 import title_img from "../../Icons/Home_title_img.jpg";
+import MyContext from "../../Context/context";
 import Event_0 from "../../Icons/Event_0.jpg";
 import Event_1 from "../../Icons/Event_1.jpg";
 import Event_2 from "../../Icons/Event_2.jpg";
@@ -14,40 +16,12 @@ import {
 import { Card, Button } from "antd";
 import "antd/dist/antd.css";
 
-const data = [
-  {
-    imgSrc: Event_0,
-    title: "Night Party",
-    duration: 120,
-    price: 300,
-    id: 0,
-  },
-  {
-    imgSrc: Event_1,
-    title: "Birthday Party",
-    duration: 200,
-    price: 600,
-    id: 1,
-  },
-  {
-    imgSrc: Event_2,
-    title: "99 Luftballons",
-    duration: 150,
-    price: 200,
-    id: 2,
-  },
-  {
-    imgSrc: Event_3,
-    title: "Animators",
-    duration: 300,
-    price: 1000,
-    id: 3,
-  },
-];
-
 const Home = () => {
-  
+  const { data } = useContext(MyContext);
   const { Meta } = Card;
+
+  const [countOfElements, setcountOfElements] = useState(4);
+
   return (
     <StyledHome>
       <InfoTitle>
@@ -66,7 +40,7 @@ const Home = () => {
         </div>
       </InfoTitle>
       <StyledEvents>
-        {data.map(({ imgSrc, title, duration, price, id }) => (
+        {Object.values(data).slice(0, countOfElements).map(({ imgSrc, title, duration, price, id }) => (
           <StyledCard
             hoverable
             cover={<img alt="example" src={imgSrc} />}
@@ -76,12 +50,17 @@ const Home = () => {
               <Meta title={title} />
               Duration: {duration}m<br />
               Price: ${price}
-              <Button type="primary">More</Button>
+              <NavLink
+                to={"/item/" + id}
+                style={{ textDecoration: "none", color: "#000000" }}
+              >
+                <Button type="primary">More</Button>
+              </NavLink>
             </StyledCardComponents>
           </StyledCard>
         ))}
       </StyledEvents>
-      <Button size="large" style={{ borderRadius: 5 }}>
+      <Button size="large" style={{ borderRadius: 5 , margin:20 }} onClick={() => setcountOfElements(countOfElements + 20)}>
         Veiw more
       </Button>
     </StyledHome>

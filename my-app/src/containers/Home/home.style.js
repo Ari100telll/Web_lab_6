@@ -5,7 +5,7 @@ export const StyledHome = styled.div`
     display: flex;
     flex-direction: column;
     width:100%;
-    height:800px;
+    /* height:800px; */
     /* justify-content: space-around; */
     align-items: center;
 
@@ -39,12 +39,12 @@ margin-top: 50px;
 
 export const StyledEvents = styled.div`
     display: flex;
-    justify-content: space-around;
-
+    justify-content: flex-start;
+    flex-wrap: wrap;
     margin-top: 60px;
 
     width: 90%;
-    height: 350px;
+    /* height: 350px; */
     /* border: 1px solid #000000; */
 
 `;
@@ -62,4 +62,6 @@ export const StyledCardComponents = styled.div`
 export const StyledCard = styled(Card)`
 width: 240px;
 height: 300px;
+/* margin-bottom: 20px; */
+margin: 0 22px 20px 22px;
 `;

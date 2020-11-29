@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import MyContext from "../../../../Context/context";
 import {
   StyledItem,
   ItemImg,
@@ -9,10 +10,12 @@ import {
 } from "./item.styled.js";
 
 export const Item = (props) => {
+  const { dataArr } = useContext(MyContext);
+
   return (
     <StyledItem width={props.width} height={props.height}>
       <ItemImg src={props.imgSrc} />
-      <ItemTitle>{props.title}</ItemTitle>
+      <ItemTitle>{props.title.toUpperCase()}</ItemTitle>
       <ItemContent>
         Prise: {props.price}$<br />
         Duration: {props.duration}m<br />
@@ -23,11 +26,10 @@ export const Item = (props) => {
       </ItemContent>
 
       <NavLink
-        exact
-        to={"/item?id=" + props.id}
+        to={"/item/" + props.id}
         style={{ textDecoration: "none", color: "#000000" }}
       >
-        <ItemCartButton> Home</ItemCartButton>
+        <ItemCartButton>More</ItemCartButton>
       </NavLink>
     </StyledItem>
   );
