@@ -1,11 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import title_img from "../../Icons/Home_title_img.jpg";
-import MyContext from "../../Context/context";
 import Event_0 from "../../Icons/Event_0.jpg";
-import Event_1 from "../../Icons/Event_1.jpg";
-import Event_2 from "../../Icons/Event_2.jpg";
-import Event_3 from "../../Icons/Event_3.jpg";
+import API from "../../APImanager/apimanager";
 import {
   StyledHome,
   InfoTitle,
@@ -13,12 +10,29 @@ import {
   StyledCardComponents,
   StyledCard,
 } from "./home.style";
-import { Card, Button } from "antd";
+import {SpinBlock} from "../App/App.styles";
+import { Card, Button, Spin } from "antd";
 import "antd/dist/antd.css";
 
 const Home = () => {
-  const { data } = useContext(MyContext);
   const { Meta } = Card;
+  const [data, setData] = useState(undefined);
+  const load = () => {
+    async function getData() {
+      let userData = await API.get("/children-event");
+      setData(userData.data);
+      console.log(data);
+    }
+    setTimeout(() => {
+      getData();
+    }, 3000);
+
+    return (
+      <SpinBlock>
+        <Spin size="large" />
+      </SpinBlock>
+    );
+  };
 
   const [countOfElements, setcountOfElements] = useState(4);
 
@@ -40,27 +54,37 @@ const Home = () => {
         </div>
       </InfoTitle>
       <StyledEvents>
-        {Object.values(data).slice(0, countOfElements).map(({ imgSrc, title, duration, price, id }) => (
-          <StyledCard
-            hoverable
-            cover={<img alt="example" src={imgSrc} />}
-            key={id}
-          >
-            <StyledCardComponents>
-              <Meta title={title} />
-              Duration: {duration}m<br />
-              Price: ${price}
-              <NavLink
-                to={"/item/" + id}
-                style={{ textDecoration: "none", color: "#000000" }}
-              >
-                <Button type="primary">More</Button>
-              </NavLink>
-            </StyledCardComponents>
-          </StyledCard>
-        ))}
+        {data == undefined
+          ? load()
+          : data
+              .slice(0, countOfElements)
+              .map(({ name, duration_in_minutes, price_in_uah, id }) => (
+                <StyledCard
+                  hoverable
+                  cover={<img alt="example" src={Event_0} />}
+                  key={id}
+                >
+                  <StyledCardComponents>
+                    <Meta title={name} />
+                    Duration: {duration_in_minutes}m<br />
+                    Price: ${price_in_uah}
+                    <NavLink
+                      to={"/item/" + id}
+                      style={{ textDecoration: "none", color: "#000000" }}
+                    >
+                      <Button type="primary">More</Button>
+                    </NavLink>
+                  </StyledCardComponents>
+                </StyledCard>
+              ))}
       </StyledEvents>
-      <Button size="large" style={{ borderRadius: 5 , margin:20 }} onClick={() => setcountOfElements(countOfElements + 20)}>
+      <Button
+        size="large"
+        style={{ borderRadius: 5, margin: 20 }}
+        onClick={() => {
+          setcountOfElements(countOfElements + 4);
+        }}
+      >
         Veiw more
       </Button>
     </StyledHome>
