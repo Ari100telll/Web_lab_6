@@ -6,17 +6,6 @@ import MyContext from "../../Context/context";
 import Home from "../Home/home";
 import Catalog from "../Catalog/catalog";
 import Item from "../Item/item";
-import Event_1 from "../../Icons/Event_1.jpg";
-import Event_2 from "../../Icons/Event_2.jpg";
-import Event_3 from "../../Icons/Event_3.jpg";
-import Event_4 from "../../Icons/Event_4.jpg";
-import Event_5 from "../../Icons/Event_0.jpg";
-import Event_6 from "../../Icons/Event_1.jpg";
-import Event_7 from "../../Icons/Event_2.jpg";
-import Event_8 from "../../Icons/Event_3.jpg";
-import Event_9 from "../../Icons/Event_4.jpg";
-import Event_10 from "../../Icons/Event_0.jpg";
-import Event_11 from "../../Icons/Event_1.jpg";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
@@ -28,6 +17,7 @@ class App extends React.Component {
         data: arr,
       }));
     };
+
     this.state = {
       data: [],
       updataArr: this.updataArr

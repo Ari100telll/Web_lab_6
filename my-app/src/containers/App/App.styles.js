@@ -9,4 +9,5 @@ export const SpinBlock = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+  height: 100px;
 `;

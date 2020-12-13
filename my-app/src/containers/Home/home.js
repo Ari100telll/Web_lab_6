@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import title_img from "../../Icons/Home_title_img.jpg";
 import Event_0 from "../../Icons/Event_0.jpg";
@@ -25,8 +25,12 @@ const Home = () => {
     }
     setTimeout(() => {
       getData();
-    }, 3000);
+    }, 1000);
+  };
 
+  useEffect(load, []);
+
+  const spiner = () => {
     return (
       <SpinBlock>
         <Spin size="large" />
@@ -54,8 +58,8 @@ const Home = () => {
         </div>
       </InfoTitle>
       <StyledEvents>
-        {data == undefined
-          ? load()
+        {data === undefined
+          ? spiner()
           : data
               .slice(0, countOfElements)
               .map(({ name, duration_in_minutes, price_in_uah, id }) => (

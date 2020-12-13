@@ -1,20 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { StyledList } from "./itemslist.styled";
 import { Item } from "./Item/item";
 import MyContext from "../../../Context/context";
 import Event_3 from "../../../Icons/Event_3.jpg";
 import { Spin } from "antd";
-  import {SpinBlock} from "../../App/App.styles";
-import API from "../../../APImanager/apimanager";
+import { SpinBlock } from "../../App/App.styles";
 
 export const ItemsList = () => {
-  const { data} = useContext(MyContext);
+  const { data } = useContext(MyContext);
+
+  const load = () => {
+    return (
+      <SpinBlock>
+        <Spin size="large" />
+      </SpinBlock>
+    );
+  };
 
   return (
-    <MyContext.Consumer>
-      {({ data }) => (
-        <StyledList>
-          {data.map(
+    <StyledList>
+      {data.length == 0
+        ? load()
+        : data.map(
             ({
               name,
               price_in_uah,
@@ -36,9 +43,7 @@ export const ItemsList = () => {
               />
             )
           )}
-        </StyledList>
-      )}
-    </MyContext.Consumer>
+    </StyledList>
   );
 };
 
