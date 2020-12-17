@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import { Spin } from "antd";
 import { SpinBlock } from "../App/App.styles";
 import Event_0 from "../../Icons/Event_0.jpg";
+import { addToCart } from "../../Redux/reducers";
+import { useDispatch } from "react-redux";
 
 import {
   StyledItem,
@@ -20,7 +22,7 @@ import API from "../../APImanager/apimanager";
 const Item = () => {
   const { id } = useParams();
   const [datta, setDatta] = useState(undefined);
-
+  const dispatch = useDispatch();
   const load = () => {
     async function getData() {
       let userData = await API.get("/children-event/" + id);
@@ -29,7 +31,7 @@ const Item = () => {
     }
     setTimeout(() => {
       getData();
-    }, 1000);
+    }, 0);
   };
 
   useEffect(load, []);
@@ -41,6 +43,10 @@ const Item = () => {
       </SpinBlock>
     );
   };
+
+  const cartCklickAdd = () => {
+    dispatch(addToCart({element: datta, quantity: 1}));
+  }
 
   return (
     <StyledItem>
@@ -77,7 +83,7 @@ const Item = () => {
               <NavLink exact to="/Catalog">
                 <StyledButton>Back to catalog</StyledButton>
               </NavLink>
-              <StyledButton type="primary">Add to cart</StyledButton>
+              <StyledButton type="primary" onClick={cartCklickAdd}>Add to cart</StyledButton>
             </div>
           </StyledBuyInfo>
         </React.Fragment>

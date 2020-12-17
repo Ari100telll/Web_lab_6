@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import MyContext from "../../../../Context/context";
 import {
   StyledItem,
   ItemImg,
@@ -10,7 +9,6 @@ import {
 } from "./item.styled.js";
 
 export const Item = (props) => {
-  const { dataArr } = useContext(MyContext);
 
   return (
     <StyledItem width={props.width} height={props.height}>

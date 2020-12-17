@@ -8,6 +8,7 @@ import Cart from "../Cart/cart";
 import Catalog from "../Catalog/catalog";
 import Item from "../Item/item";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { GlobalContextProvider } from "../../Redux/provider";
 
 class App extends React.Component {
   constructor(props) {
@@ -21,33 +22,36 @@ class App extends React.Component {
 
     this.state = {
       data: [],
-      updataArr: this.updataArr
+      updataArr: this.updataArr,
     };
   }
 
   render() {
     return (
       <Router>
+        <GlobalContextProvider>
         <MyContext.Provider value={this.state}>
-          <StyledApp>
-            <Header />
-            <Switch>
-              <Route path="/Catalog">
-                <Catalog />
-              </Route>
-              <Route path="/Cart">
-                <Cart />
-              </Route>
-              <Route path="/item/:id">
-                <Item />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
-            <Footer />
-          </StyledApp>
+          
+            <StyledApp>
+              <Header />
+              <Switch>
+                <Route path="/Catalog">
+                  <Catalog />
+                </Route>
+                <Route path="/Cart">
+                  <Cart />
+                </Route>
+                <Route path="/item/:id">
+                  <Item />
+                </Route>
+                <Route path="/">
+                  <Home />
+                </Route>
+              </Switch>
+              <Footer />
+            </StyledApp>
         </MyContext.Provider>
+        </GlobalContextProvider>
       </Router>
     );
   }
