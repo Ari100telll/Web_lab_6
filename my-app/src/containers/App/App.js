@@ -5,7 +5,9 @@ import { StyledApp } from "./App.styles";
 import MyContext from "../../Context/context";
 import Home from "../Home/home";
 import Cart from "../Cart/cart";
+import CartForm from "../CartForm/cartform";
 import Catalog from "../Catalog/catalog";
+import Success from "../Success/success";
 import Item from "../Item/item";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { GlobalContextProvider } from "../../Redux/provider";
@@ -40,6 +42,12 @@ class App extends React.Component {
                 </Route>
                 <Route path="/Cart">
                   <Cart />
+                </Route>
+                <Route path="/CartForm">
+                  <CartForm />
+                </Route>
+                <Route path="/Success">
+                  <Success />
                 </Route>
                 <Route path="/item/:id">
                   <Item />
