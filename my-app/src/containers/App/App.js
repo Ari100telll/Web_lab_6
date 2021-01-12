@@ -8,9 +8,14 @@ import Cart from "../Cart/cart";
 import CartForm from "../CartForm/cartform";
 import Catalog from "../Catalog/catalog";
 import Success from "../Success/success";
+import Login from "../Login/login";
+import SignUp from "../Signup/signup";
 import Item from "../Item/item";
+import ProtectedRoute from "../ProtectedRoute/protectedrout";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { GlobalContextProvider } from "../../Redux/provider";
+
+const logLink = "Login";
 
 class App extends React.Component {
   constructor(props) {
@@ -27,38 +32,67 @@ class App extends React.Component {
       updataArr: this.updataArr,
     };
   }
-
+  
   render() {
     return (
       <Router>
         <GlobalContextProvider>
-        <MyContext.Provider value={this.state}>
-          
+          <MyContext.Provider value={this.state}>
             <StyledApp>
               <Header />
               <Switch>
-                <Route path="/Catalog">
-                  <Catalog />
-                </Route>
-                <Route path="/Cart">
-                  <Cart />
-                </Route>
-                <Route path="/CartForm">
-                  <CartForm />
-                </Route>
-                <Route path="/Success">
-                  <Success />
-                </Route>
-                <Route path="/item/:id">
-                  <Item />
-                </Route>
-                <Route path="/">
-                  <Home />
-                </Route>
+                <ProtectedRoute
+                  component={Catalog}
+                  isProtectedPage
+                  redirect={logLink}
+                  path="/Catalog"
+                />
+                <ProtectedRoute
+                  component={Cart}
+                  isProtectedPage
+                  redirect={logLink}
+                  path="/Cart"
+                />
+                <ProtectedRoute
+                  component={CartForm}
+                  isProtectedPage
+                  redirect={logLink}
+                  path="/CartForm"
+                />
+                <ProtectedRoute
+                  component={Success}
+                  isProtectedPage
+                  redirect={logLink}
+                  path="/Success"
+                />
+                <ProtectedRoute
+                  component={Item}
+                  isProtectedPage
+                  redirect={logLink}
+                  path="/item/:id"
+                />
+                <ProtectedRoute
+                  component={Login}
+                  isProtectedPage={false}
+                  redirect={""}
+                  path="/Login"
+                />
+                <ProtectedRoute
+                  component={SignUp}
+                  isProtectedPage={false}
+                  redirect={""}
+                  path="/SignUp"
+                />
+                <ProtectedRoute
+                  component={Home}
+                  isProtectedPage
+                  redirect={logLink}
+                  path="/"
+                />
               </Switch>
               <Footer />
             </StyledApp>
-        </MyContext.Provider>
+          </MyContext.Provider>
         </GlobalContextProvider>
       </Router>
     );

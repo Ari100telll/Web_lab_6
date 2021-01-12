@@ -1,9 +1,22 @@
 import React from "react";
-import { StyledHeader } from "./header.style";
+import { StyledHeader, StyledLogOut, StyledLogOutButton } from "./header.style";
 import { NavLink } from "react-router-dom";
 import logo from "../../../Icons/logo_icon.png";
+import { useLocalStorage } from "@rehooks/local-storage";
 
 const Header = () => {
+  const [email, setEmail, deleteEmail] = useLocalStorage("Email");
+
+  const butout = () => {
+    if (!!email) {
+      return (
+        <StyledLogOut>
+          <StyledLogOutButton onClick={()=>deleteEmail()}>Log Out</StyledLogOutButton>
+        </StyledLogOut>
+      );
+    }
+  };
+
   return (
     <StyledHeader>
       <div>
@@ -29,6 +42,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
+      {butout()}
     </StyledHeader>
   );
 };
