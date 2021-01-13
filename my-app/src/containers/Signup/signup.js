@@ -81,7 +81,7 @@ const SignUp = () => {
             </StyledFildPlace>
 
             <button type="submit">Sign Up</button>
-            <StyledSignButton onClick={() => history.push("/SignUp")}>
+            <StyledSignButton onClick={() => history.push("/Login")}>
               or Login
             </StyledSignButton>
           </StyledForm>

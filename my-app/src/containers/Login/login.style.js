@@ -12,7 +12,7 @@ export const StyledLogin = styled.div`
 
   height: 400px;
 
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 
 export const StyledForm = styled(Form)`

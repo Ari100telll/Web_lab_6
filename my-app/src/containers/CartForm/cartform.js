@@ -9,7 +9,11 @@ import {
   StyledFildPlace,
   StyledButtonSubmit, 
 } from "./cartform.style";
+import { useLocalStorage } from "@rehooks/local-storage";
+
 const CartForm = () => {
+
+  const [emailstr] = useLocalStorage("Email");
 
   const history = useHistory();
 
@@ -44,7 +48,7 @@ const CartForm = () => {
         initialValues={{
           firstName: "",
           lastName: "",
-          email: "",
+          email: emailstr,
           phone: "",
           adress: "",
           date: "",
